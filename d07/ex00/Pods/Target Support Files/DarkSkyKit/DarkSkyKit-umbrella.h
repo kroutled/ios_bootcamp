@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double ForecastIOVersionNumber;
-FOUNDATION_EXPORT const unsigned char ForecastIOVersionString[];
+FOUNDATION_EXPORT double DarkSkyKitVersionNumber;
+FOUNDATION_EXPORT const unsigned char DarkSkyKitVersionString[];
 

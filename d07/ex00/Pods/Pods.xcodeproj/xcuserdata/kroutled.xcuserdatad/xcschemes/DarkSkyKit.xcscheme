@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "3F19738396425B89322D95E08B55C21F"
-               BlueprintName = "ForecastIO"
+               BlueprintIdentifier = "EB3E7295F58D32BF57CD4AC9AC018E5F"
+               BlueprintName = "DarkSkyKit"
                ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "ForecastIO.framework">
+               BuildableName = "DarkSkyKit.framework">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

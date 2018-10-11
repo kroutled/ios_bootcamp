@@ -7,5 +7,5 @@ target 'ex00' do
 
   # Pods for ex00
 	pod "RecastAI"
-	pod "ForecastIO"
+	pod "DarkSkyKit"
 end

@@ -8,12 +8,13 @@
 
 import UIKit
 import RecastAI
-import ForecastIO
+import DarkSkyKit
 
 class ViewController: UIViewController {
 
     var bot: RecastAIClient? = nil
-     let client = DarkSkyClient(apiKey: "a6bda0c209b0daab9e03fdad6d65caef")
+     //let client = DarkSkyClient(apiKey: "a6bda0c209b0daab9e03fdad6d65caef")
+    let forecastClient = DarkSkyKit(apiToken: "a6bda0c209b0daab9e03fdad6d65caef")
     
     @IBOutlet weak var displayLabel: UILabel!
     @IBOutlet weak var userInput: UITextField!
@@ -21,6 +22,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.bot = RecastAIClient(token: "ed6e3290f37e1baabdbe3036858aedda")
+        
        
     }
 
@@ -30,7 +32,11 @@ class ViewController: UIViewController {
     }
 
     @IBAction func requestButton(_ sender: UIButton) {
-        makeRequest(request: userInput.text!)
+        let text = userInput.text?.trimmingCharacters(in: CharacterSet.init(charactersIn: "\t\n "))
+        if text != ""
+        {
+            makeRequest(request: text!)
+        }
     }
     
     func makeRequest(request: String)
@@ -46,25 +52,45 @@ class ViewController: UIViewController {
     {
         let location = response.get(entity: "location")
         print(location ?? "No Location")
+        
+        let c = Configuration(token: "a6bda0c209b0daab9e03fdad6d65caef", units: .si, exclude: .alerts, lang: "en")
+        let forecastClient = DarkSkyKit(configuration: c)
+        
         if let myLat = location?["lat"]{
             let myLon = location!["lng"]
             
-            self.client.getForecast(latitude: myLat as! Double, longitude: myLon as! Double) { result in
+            forecastClient.current(latitude: myLat as! Double, longitude: myLon as! Double) { result in
                 switch result {
-                case .success(let currentForecast, let requestMetadata):
-                //  We got the current forecast!
-                    print(currentForecast)
-                    DispatchQueue.main.async {
-                    self.displayLabel.text = currentForecast.currently?.summary
+                case .success(let forecast):
+                    // Manage weather data using the Forecast model. Ex:
+                    if let current = forecast.currently {
+                        let t = current.temperature
+                        self.displayLabel.text = current.summary
                     }
                     break
                 case .failure(let error):
-                    //  Uh-oh. We have an error!
+                    // Manage error case
                     print(error)
-                    self.displayLabel.text = "Error"
                     break
                 }
             }
+            
+//            self.client.getForecast(latitude: myLat as! Double, longitude: myLon as! Double) { result in
+//                switch result {
+//                case .success(let currentForecast, let requestMetadata):
+//                //  We got the current forecast!
+//                    print(currentForecast)
+//                    DispatchQueue.main.async {
+//                    self.displayLabel.text = currentForecast.currently?.summary
+//                    }
+//                    break
+//                case .failure(let error):
+//                    //  Uh-oh. We have an error!
+//                    print(error)
+//                    self.displayLabel.text = "Error"
+//                    break
+//                }
+//            }
         //print(intent?.slug)
 //        displayLabel.text = intent?.slug
         }
