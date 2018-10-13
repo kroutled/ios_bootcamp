@@ -90,6 +90,27 @@ class ViewController: UIViewController {
         
         return CLLocation(latitude: latitude, longitude: longitude)
     }
+    
+    func getDirections () {
+        guard let location = locationManager.location?.coordinate else {
+            return
+        }
+        
+        let request =
+    }
+    
+    func directionsRequest(from coordinate: CLLocationCoordinate2D) -> MKDirections.Request {
+        let destinationCoordinate = getCenterOfMap(for: mapView).coordinate
+        let startingLocation = MKPlacemark(coordinate: coordinate)
+        let destination = MKPlacemark(coordinate: destinationCoordinate)
+        
+        let request = MKDirections.Request()
+        
+    }
+    
+    @IBAction func GetRoute(_ sender: UIButton) {
+        getDirections()
+    }
 }
 
 extension ViewController: CLLocationManagerDelegate {
