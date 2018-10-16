@@ -1,0 +1,22 @@
+{
+  "name": "kroutled2018",
+  "version": "0.1.0",
+  "summary": "A short description of kroutled2018.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/kroutled/kroutled2018",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "kroutled": "kroutled@student.wethinkcode.co.za"
+  },
+  "source": {
+    "git": "https://github.com/kroutled/kroutled2018.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "kroutled2018/Classes/**/*"
+}

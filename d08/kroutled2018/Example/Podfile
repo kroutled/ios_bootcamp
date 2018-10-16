@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'kroutled2018_Example' do
+  pod 'kroutled2018', :path => '../'
+
+  target 'kroutled2018_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
